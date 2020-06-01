@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Lima',
 
     /*
     |--------------------------------------------------------------------------
@@ -150,6 +150,10 @@ return [
         /*
          * Package Service Providers...
          */
+        #------------ me: for sidebar view ---------
+        #----- Blogcontroller: methods are working on (show, category)
+        App\Providers\ComposerServiceProbider::class,
+
 
         /*
          * Application Service Providers...

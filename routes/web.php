@@ -11,10 +11,30 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+    Route::get('/', [
+        'uses' => 'BlogController@index',
+        'as'    => 'blog'
+    ]);
+
+    Route::get('/blog/{post}', [
+        'uses' => 'BlogController@show',
+        'as'   => 'blog.show'
+    ]);
+
+    #=================   Category show   ====================
+    Route::get('/category/{category}', [
+        'uses' => 'BlogController@category',
+        'as'   => 'category'
+    ]);
+
+    Route::get('/author/{author}',[
+        'uses' => 'BlogController@author',
+        'as' => 'author'
+        ]);
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'Backend\HomeController@index')->name('home');
+
+#=================   Post   ====================
+    Route::resource('/backend/blog', 'Backend\BlogController');

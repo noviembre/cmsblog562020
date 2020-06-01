@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -26,4 +29,33 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'author_id');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function gravatar()
+    {
+        $email = $this->email;
+        $default = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/User_icon-cp.svg/200px-User_icon-cp.svg.png";
+        $size = 50;
+        return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+    }
+
 }
