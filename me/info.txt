@@ -1,1 +1,8 @@
 1. se instalo laravel collective
+2. se instalo image intervention:
+    2.1 require intervention/image
+    2.2 info.php
+        Intervention\Image\ImageServiceProvider::class,
+        'Image' => Intervention\Image\Facades\Image::class
+    3. php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
+3.
