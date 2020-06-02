@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+
 
 class BlogController extends BackendController
 {
@@ -65,7 +67,16 @@ class BlogController extends BackendController
             $fileName    = $image->getClientOriginalName();
             $destination = $this->uploadPath;
 
-            $image->move($destination, $fileName);
+            $successUploaded = $image->Move($destination, $fileName);
+
+            if($successUploaded)
+            {
+                $extension = $image->getClientOriginalExtension();
+                $thumbnail = str_replace(".{$extension}", "_thumb.{$extension}", $fileName);
+                Image::make($destination . '/' . $fileName)
+                    ->resize(250,170)
+                    ->save($destination . '/' . $thumbnail);
+            }
             $data['image'] = $fileName;
         }
 
