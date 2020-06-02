@@ -70,7 +70,7 @@
                                         <span class="help-block">{{ $errors->first('slug') }}</span>
                                     @endif
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group excerpt">
                                     {!! Form::label('excerpt') !!}
                                     {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}
                                 </div>
@@ -120,7 +120,7 @@
                             <div class="card-footer">
 
                                 {!! Form::submit('Create new post', ['class' => 'btn btn-primary']) !!}
-                                
+
                             </div>
                             {{Form::close()}}
 

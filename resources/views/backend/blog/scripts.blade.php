@@ -4,6 +4,8 @@
 
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('backend/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/plugins/simple-mde/simplemde.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/css/custom.css') }}">
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
@@ -16,6 +18,7 @@
     <script src="{{ asset('backend/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('backend/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('backend/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/plugins/simple-mde/simplemde.min.js') }}"></script>
     <!-- AdminLTE App -->
     <!-- AdminLTE for demo purposes -->
     {{--<script src="../../dist/js/demo.js"></script>--}}
@@ -47,6 +50,9 @@
             slugInput.val(theSlug);
         });
         <!-- create a slug closes -->
+
+        var simplemde1 = new SimpleMDE({ element: $("#excerpt")[0] });
+        var simplemde2 = new SimpleMDE({ element: $("#body")[0] });
 
 
     </script>
