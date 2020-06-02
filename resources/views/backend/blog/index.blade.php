@@ -45,7 +45,7 @@
                                 @endif
 
 
-                                @if ($posts->count())
+                                @if (!$posts->count())
                                     <div class="alert alert-danger">
                                         <strong>No record found</strong>
                                     </div>

@@ -13,12 +13,12 @@ class BlogController extends BackendController
      * @return \Illuminate\Http\Response
      */
 
-    protected $limit = 10;
+//    protected $limit = 10;
 
     public function index()
     {
         $posts     = Post::with('category', 'author')
-            ->latest()->paginate($this->limit);
+            ->latest()->get();
 
         $postCount = Post::count();
 
