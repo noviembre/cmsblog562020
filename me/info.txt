@@ -5,4 +5,5 @@
         Intervention\Image\ImageServiceProvider::class,
         'Image' => Intervention\Image\Facades\Image::class
     3. php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
-3.
+3. Install SimpleMde Markdown editor (solo css y js)
+4. Install - bootstrap-datetimepicker

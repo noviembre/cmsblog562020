@@ -82,10 +82,19 @@
                                         <span class="help-block">{{ $errors->first('body') }}</span>
                                     @endif
                                 </div>
+
+
+
+
                                 <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
                                     {!! Form::label('published_at', 'Publish Date') !!}
-                                    {!! Form::text('published_at', null, ['class' => 'form-control', 'placeholder' => 'Y-m-d H:i:s']) !!}
 
+                                    <div class='input-group date' id='datetimepicker1'>
+                                        {!! Form::text('published_at', null, ['class' => 'form-control', 'placeholder' => 'Y-m-d H:i:s']) !!}
+                                        <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                    </div>
                                     @if($errors->has('published_at'))
                                         <span class="help-block">{{ $errors->first('published_at') }}</span>
                                     @endif
