@@ -32,7 +32,8 @@
                 {!! Form::model($post, [
                               'method' => 'POST',
                               'route' => 'blog.store',
-                              'files' => true
+                              'files' => true,
+                               'id' => 'post-form'
                           ]) !!}
 
                 <div class="row">
@@ -99,6 +100,7 @@
                                 </div>
                                 <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
                                     {!! Form::label('category_id', 'Category') !!}
+
                                     {!! Form::select('category_id', App\Category::pluck('title', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Choose category']) !!}
 
                                     @if($errors->has('category_id'))
@@ -124,7 +126,15 @@
 
                             </div>
                             <div class="card-footer">
-                                {!! Form::submit('Create new post', ['class' => 'btn btn-primary']) !!}
+
+                                <div class="pull-left">
+                                    <a id="draft-btn" class="btn btn-default">Save Draft</a>
+                                </div>
+                                <div class="pull-right">
+                                    {!! Form::submit('Publish', ['class' => 'btn btn-primary']) !!}
+                                </div>
+
+
                             </div>
 
                         </div>
