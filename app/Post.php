@@ -59,10 +59,11 @@ class Post extends Model
         #--- if image is not null
         if ( ! is_null($this->image))
         {
-            $imagePath = public_path() . "/app/img/" . $this->image;
+            $directory = config('cms.image.directory');
+            $imagePath = public_path() . "/{$directory}/" . $this->image;
             #---- and if file exists in the server
             if (file_exists($imagePath))
-                $imageUrl = asset("/app/img/" . $this->image);
+                $imageUrl = asset("/{$directory}/" . $this->image);
         }
 
         return $imageUrl;
@@ -79,10 +80,12 @@ class Post extends Model
 
         if ( ! is_null($this->image))
         {
+            $directory = config('cms.image.directory');
+
             $ext       = substr(strrchr($this->image, '.'), 1);
             $thumbnail = str_replace(".{$ext}", "_thumb.{$ext}", $this->image);
-            $imagePath = public_path() . "/app/img/" . $thumbnail;
-            if (file_exists($imagePath)) $imageUrl = asset("app/img/" . $thumbnail);
+            $imagePath = public_path() . "/{$directory}/" . $thumbnail;
+            if (file_exists($imagePath)) $imageUrl = asset("/{$directory}/" . $thumbnail);
         }
 
         return $imageUrl;
