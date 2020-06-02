@@ -30,79 +30,89 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-6">
 
-                        <div class="card">
+                        <div class="card card-primary">
 
 
                             <!-- /.card-header -->
+                            <div class="card-header">
+                                <h3 class="card-title">Quick Example</h3>
+
+                            </div>
+                            <!-- /.card-header -->
+
+                            {!! Form::model($post, [
+                               'method' => 'POST',
+                               'route' => 'blog.store'
+                           ]) !!}
+
+
+
                             <div class="card-body">
 
+                                <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
+                                    {!! Form::label('title') !!}
+                                    {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Nombre']) !!}
+                                    @if($errors->has('title'))
+                                        <span class="help-block">{{ $errors->first('title') }}</span>
+                                    @endif
 
-                                @if ($posts->count())
-                                    <div class="alert alert-danger">
-                                        <strong>No record found</strong>
-                                    </div>
-                                @else
-
-                                    <table id="example1" class="table table-bordered table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th>Title</th>
-                                            <th width="120">Author</th>
-                                            <th width="150">Category</th>
-                                            <th width="170">Date</th>
-                                            <th width="180">Action</th>
-
-                                        </tr>
-                                        </thead>
+                                </div>
 
 
-                                        <tbody>
+                                <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
+                                    {!! Form::label('slug') !!}
+                                    {!! Form::text('slug', null, ['class' => 'form-control']) !!}
 
-                                        @foreach($posts as $post)
+                                    @if($errors->has('slug'))
+                                        <span class="help-block">{{ $errors->first('slug') }}</span>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('excerpt') !!}
+                                    {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}
+                                </div>
+                                <div class="form-group {{ $errors->has('body') ? 'has-error' : '' }}">
+                                    {!! Form::label('body') !!}
+                                    {!! Form::textarea('body', null, ['class' => 'form-control']) !!}
 
-                                            <tr>
+                                    @if($errors->has('body'))
+                                        <span class="help-block">{{ $errors->first('body') }}</span>
+                                    @endif
+                                </div>
+                                <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
+                                    {!! Form::label('published_at', 'Publish Date') !!}
+                                    {!! Form::text('published_at', null, ['class' => 'form-control', 'placeholder' => 'Y-m-d H:i:s']) !!}
 
-                                                <td>{{ $post->title }}</td>
-                                                <td> {{ $post->author->name }} </td>
-                                                <td>{{ $post->category->title }}</td>
-                                                <td>
-                                                    date
-                                                </td>
+                                    @if($errors->has('published_at'))
+                                        <span class="help-block">{{ $errors->first('published_at') }}</span>
+                                    @endif
+                                </div>
 
+                                <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
+                                    {!! Form::label('category_id', 'Category') !!}
+                                    {!! Form::select('category_id', App\Category::pluck('title', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Choose category']) !!}
 
-                                                <td>
-                                                    date
-                                                    <abbr title="{{ $post->dateFormatted(true) }}">{{ $post->dateFormatted() }}</abbr> |
-                                                    {!! $post->publicationLabel() !!}
-                                                </td>
+                                    @if($errors->has('category_id'))
+                                        <span class="help-block">{{ $errors->first('category_id') }}</span>
+                                    @endif
+                                </div>
 
-                                            </tr>
+                                <hr>
 
-                                        @endforeach
-
-
-                                        </tbody>
-
-
-                                        <tfoot>
-                                        <tr>
-                                            <th>Title</th>
-                                            <th width="120">Author</th>
-                                            <th width="150">Category</th>
-                                            <th width="170">Date</th>
-                                            <th width="180">Action</th>
-
-                                        </tr>
-                                        </tfoot>
-
-                                    </table>
-
-                                @endif
 
                             </div>
                             <!-- /.card-body -->
+
+
+
+                            <div class="card-footer">
+
+                                {!! Form::submit('Create new post', ['class' => 'btn btn-primary']) !!}
+                                {{--<button type="submit" class="btn btn-primary">Submit</button>--}}
+                            </div>
+                            {{Form::close()}}
 
 
                         </div>

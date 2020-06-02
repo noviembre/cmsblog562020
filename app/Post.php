@@ -9,6 +9,15 @@ class Post extends Model
 {
     protected $dates =['published_at'];
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'excerpt',
+        'body',
+        'published_at',
+        'category_id',
+    ];
+
 
     public function category()
     {
