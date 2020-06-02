@@ -29,27 +29,18 @@
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
+                {!! Form::model($post, [
+                              'method' => 'POST',
+                              'route' => 'blog.store',
+                              'files' => true
+                          ]) !!}
+
                 <div class="row">
-                    <div class="col-md-6">
 
+
+
+                    <div class="col-md-9">
                         <div class="card card-primary">
-
-
-                            <!-- /.card-header -->
-                            <div class="card-header">
-                                <h3 class="card-title">Quick Example</h3>
-
-                            </div>
-                            <!-- /.card-header -->
-
-                            {!! Form::model($post, [
-                               'method' => 'POST',
-                               'route' => 'blog.store',
-                               'files' => true
-                           ]) !!}
-
-
-
                             <div class="card-body">
 
                                 <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
@@ -83,23 +74,29 @@
                                     @endif
                                 </div>
 
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
 
+                    <div class="col-md-3">
+                        <div class="card card-primary">
 
-
+                            <div class="card-body">
                                 <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
                                     {!! Form::label('published_at', 'Publish Date') !!}
 
                                     <div class='input-group date' id='datetimepicker1'>
                                         {!! Form::text('published_at', null, ['class' => 'form-control', 'placeholder' => 'Y-m-d H:i:s']) !!}
                                         <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
                                     </div>
                                     @if($errors->has('published_at'))
                                         <span class="help-block">{{ $errors->first('published_at') }}</span>
                                     @endif
                                 </div>
-
                                 <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
                                     {!! Form::label('category_id', 'Category') !!}
                                     {!! Form::select('category_id', App\Category::pluck('title', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Choose category']) !!}
@@ -109,44 +106,34 @@
                                     @endif
                                 </div>
 
-                                <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
 
+
+                                <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                         <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
                                             <img src="http://placehold.it/200x150&text=No+Image" alt="...">
                                         </div>
+                                        <br>
                                         <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
                                         <div>
                                             <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{!! Form::file('image') !!}</span>
                                             <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                         </div>
                                     </div>
-
-                                    
                                 </div>
 
-                                <hr>
-
-
                             </div>
-                            <!-- /.card-body -->
-
-
-
                             <div class="card-footer">
-
                                 {!! Form::submit('Create new post', ['class' => 'btn btn-primary']) !!}
-
                             </div>
-                            {{Form::close()}}
-
 
                         </div>
-                        <!-- /.card -->
                     </div>
 
 
+
                 </div>
+            {{Form::close()}}
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
