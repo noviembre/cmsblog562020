@@ -118,5 +118,13 @@ class Post extends Model
         else {
             return '<small class="badge badge-success"> Published</small>';
         }
+
+    }
+
+    #---------- using on | create post ----
+    public function setPublishedAtAttribute($value)
+    {
+        #--- if there is data save it otherwise save as null
+        $this->attributes['published_at'] = $value ?: NULL;
     }
 }
