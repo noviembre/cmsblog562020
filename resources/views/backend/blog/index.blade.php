@@ -38,14 +38,10 @@
                             <!-- /.card-header -->
                             <div class="card-body">
 
-                                @if(session('message'))
-                                    <div class="alert alert-info">
-                                        {{ session('message') }}
-                                    </div>
-                                @endif
+                                @include('backend.blog.message')
 
 
-                                @if (!$posts->count())
+                            @if (!$posts->count())
                                     <div class="alert alert-danger">
                                         <strong>No record found</strong>
                                     </div>
