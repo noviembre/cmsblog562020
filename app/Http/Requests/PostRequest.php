@@ -23,6 +23,7 @@ class PostRequest extends FormRequest
      */
     public function rules()
     {
+        dd($this->method());
         return [
             'title' => 'required',
             'slug' => 'required|unique:posts',
