@@ -26,9 +26,17 @@
                        'route' => ['categories.destroy', $category->id ]
                    ]) !!}
 
-                    <button type="submit" onclick="return confirm('are you sure?')" class="btn btn-danger btn-sm">
-                        <i class="fa fa-times"></i>
-                    </button>
+                    @if($category->id == config('cms.default_category_id'))
+                        <button onclick="return false" type="submit" class="btn btn-sm btn-default disabled">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    @else
+
+                        <button type="submit" onclick="return confirm('are you sure?')" class="btn btn-danger btn-sm">
+                            <i class="fa fa-times"></i>
+                        </button>
+
+                    @endif
 
                     {{Form::close()}}
 
