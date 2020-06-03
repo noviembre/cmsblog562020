@@ -26,20 +26,10 @@ class CategoriesController extends BackendController
      */
     public function create()
     {
-        //
+        $category = new Category();
+        return view("backend.categories.create", compact('category'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
+    
     /**
      * Display the specified resource.
      *
