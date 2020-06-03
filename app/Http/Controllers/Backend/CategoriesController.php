@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Requests\CategoryDestroyRequest;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
+use App\Post;
 use Illuminate\Http\Request;
 
 class CategoriesController extends BackendController
@@ -77,9 +78,15 @@ class CategoriesController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CategoryDestroyRequest $id)
+    public function destroy(CategoryDestroyRequest $request, $id)
     {
-        Category::findOrFail($id)->delete();
+
+        #--get all post including trashed and save as default_category_id before delete the category
+        Post::withTrashed()->where('category_id', $id)
+            ->update(['category_id' => config('cms.default_category_id')]);
+        $category = Category::findOrFail($id);
+        $category->delete();
+
         return redirect()->route('categories.index')
             ->with("message", "Category was deleted successfully!");
     }
