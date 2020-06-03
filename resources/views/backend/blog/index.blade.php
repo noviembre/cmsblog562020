@@ -41,13 +41,15 @@
 
 
                                 <div class="card-tools">
-                                    <a href="?status=all">All</a> |
 
-                                    <a href="?status=published">Published</a> |
-                                    <a href="?status=scheduled">Scheduled</a> |
-                                    <a href="?status=draft">Draft</a> |
-
-                                    <a href="?status=trash">Trash</a>
+                                    <?php $links = [] ?>
+                                    @foreach($statusList as $key => $value)
+                                        @if($value)
+                                            <?php $selected = Request::get('status') == $key ? 'selected-status' : '' ?>
+                                            <?php $links[] = "<a class=\"{$selected}\" href=\"?status={$key}\">" . ucwords($key) . "({$value})</a>" ?>
+                                        @endif
+                                    @endforeach
+                                    {!! implode(' | ', $links) !!}
                                 </div>
                             </div>
 
