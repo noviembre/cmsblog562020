@@ -1,0 +1,25 @@
+1. php artisan route list
+
+Invidato@PC MINGW64 /a/win/laragon/www/cmsblog57 (master)
+$ aarl
++--------+-----------+--------------------------+------------------+------------------------------------------------------------------------+--------------+
+| Domain | Method    | URI                      | Name             | Action                                                                 | Middleware   |
++--------+-----------+--------------------------+------------------+------------------------------------------------------------------------+--------------+
+|        | GET|HEAD  | /                        | blog             | App\Http\Controllers\BlogController@index                              | web          |
+|        | GET|HEAD  | api/user                 |                  | Closure                                                                | api,auth:api |
+|        | GET|HEAD  | author/{author}          | author           | App\Http\Controllers\BlogController@author                             | web          |
+|        | POST      | backend/blog             | blog.store       | App\Http\Controllers\Backend\BlogController@store                      | web,auth     |
+|        | GET|HEAD  | backend/blog             | blog.index       | App\Http\Controllers\Backend\BlogController@index                      | web,auth     |
+|        | GET|HEAD  | backend/blog/create      | blog.create      | App\Http\Controllers\Backend\BlogController@create                     | web,auth     |
+|        | PUT|PATCH | backend/blog/{blog}      | blog.update      | App\Http\Controllers\Backend\BlogController@update                     | web,auth     |
+|        | GET|HEAD  | backend/blog/{blog}      | blog.show        | App\Http\Controllers\Backend\BlogController@show                       | web,auth     |
+|        | DELETE    | backend/blog/{blog}      | blog.destroy     | App\Http\Controllers\Backend\BlogController@destroy                    | web,auth     |
+|        | GET|HEAD  | backend/blog/{blog}/edit | blog.edit        | App\Http\Controllers\Backend\BlogController@edit                       | web,auth     |
+
+2. answer:
+ pasa el parametro {blog}
+3. test
+    puedes hacer una prueba de la siguiente form:
+    * copia el slug de aún post existente
+    * crea un nuevo post con el slug copiado
+    * te debe aparecer un mjs q diga que ese slug ya existe.
