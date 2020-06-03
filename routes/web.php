@@ -50,3 +50,8 @@ Route::get('/home', 'Backend\HomeController@index')->name('home');
         'uses' => 'Backend\BlogController@forceDestroy',
         'as'   => 'blog.force-destroy'
     ]);
+
+
+    #=====================================================
+    #=================   Categories   ====================
+    Route::resource('/backend/categories', 'Backend\CategoriesController');

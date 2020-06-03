@@ -1,6 +1,6 @@
 @extends('layouts.backend.main')
 
-@section('title', 'MyBlog | Index')
+@section('title', 'MyBlog | categories')
 @section('content')
 
     <div class="content-wrapper">
@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">display all blog posts</h1>
+                        <h1 class="m-0 text-dark">display all categories </h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -17,8 +17,8 @@
                             <li class="breadcrumb-item">
                                 <a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('blog.index') }}">Blog</a></li>
-                            <li class="active breadcrumb-item" >All Posts</li>
+                            <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">categories</a></li>
+                            <li class="active breadcrumb-item" >All categories</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -36,21 +36,7 @@
                         <div class="card">
 
                             <div class="card-header">
-
-                                    <a href="{{ route('blog.create') }}" class="btn btn-success">Add New</a>
-
-
-                                <div class="card-tools">
-
-                                    <?php $links = [] ?>
-                                    @foreach($statusList as $key => $value)
-                                        @if($value)
-                                            <?php $selected = Request::get('status') == $key ? 'selected-status' : '' ?>
-                                            <?php $links[] = "<a class=\"{$selected}\" href=\"?status={$key}\">" . ucwords($key) . "({$value})</a>" ?>
-                                        @endif
-                                    @endforeach
-                                    {!! implode(' | ', $links) !!}
-                                </div>
+                                <a href="{{ route('categories.create') }}" class="btn btn-success">Add New</a>
                             </div>
 
 
@@ -59,22 +45,12 @@
 
                                 @include('backend.partials.message')
 
-
-                            @if (!$posts->count())
+                            @if (!$categories->count())
                                     <div class="alert alert-danger">
                                         <strong>No record found</strong>
                                     </div>
                                 @else
-
-                                    @if($onlyTrashed)
-                                    <!-- If there is any trashed post show ----->
-                                        @include('backend.blog.table-trash')
-                                    @else
-                                    <!-- else  show all post ----->
-                                        @include('backend.blog.table')
-
-                                    @endif
-
+                                        @include('backend.categories.table')
                                 @endif
 
                             </div>
