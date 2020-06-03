@@ -142,4 +142,13 @@ class BlogController extends BackendController
         return redirect()->back()
             ->with('trash-message', ['Your post moved to Trash', $id]);
     }
+
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->restore();
+        return redirect()->back()
+            ->with('message', 'You post has been moved from the Trash');
+    }
 }

@@ -38,3 +38,9 @@ Route::get('/home', 'Backend\HomeController@index')->name('home');
 
 #=================   Post   ====================
     Route::resource('/backend/blog', 'Backend\BlogController');
+
+    #-------------  Restore from trashed post   -------------
+    Route::put('/backend/blog/restore/{blog}', [
+        'uses' => 'Backend\BlogController@restore',
+        'as'   => 'backend.blog.restore'
+    ]);
