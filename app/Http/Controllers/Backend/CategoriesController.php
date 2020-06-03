@@ -78,6 +78,8 @@ class CategoriesController extends BackendController
      */
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+        return redirect()->route('categories.index')
+            ->with("message", "Category was deleted successfully!");
     }
 }
