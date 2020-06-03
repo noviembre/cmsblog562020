@@ -136,8 +136,15 @@ class BlogController extends BackendController
     public function update(PostRequest $request, $id)
     {
         $post = Post::findOrFail($id);
+        $oldImage = $post->image;
         $data = $this->handleRequest($request);
         $post->update($data);
+
+        #---- if old image (db) is different to the new one
+        if ($oldImage !== $post->image) {
+            #--- then remove it
+            $this->removeImage($oldImage);
+        }
 
         return redirect('/backend/blog')
             ->with('message', 'Your post was updated successfully!');
