@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Category;
+use App\Http\Requests\CategoryDestroyRequest;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use Illuminate\Http\Request;
@@ -76,7 +77,7 @@ class CategoriesController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CategoryDestroyRequest $id)
     {
         Category::findOrFail($id)->delete();
         return redirect()->route('categories.index')

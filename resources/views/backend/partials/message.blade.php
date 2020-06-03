@@ -3,6 +3,11 @@
         {{ session('message') }}
     </div>
 
+@elseif(session('no-authorized-message'))
+    <div class="alert alert-danger">
+        {{ session('no-authorized-message') }}
+    </div>
+
 @elseif(session('trash-message'))
 
     <?php list($message, $postId) = session('trash-message') ?>
