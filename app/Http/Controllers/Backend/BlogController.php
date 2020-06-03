@@ -33,7 +33,33 @@ class BlogController extends BackendController
             $posts = Post::onlyTrashed('category', 'author')->latest()->get();
             $postCount = Post::count();
             $onlyTrashed = TRUE;
-        } else
+        }
+        #--- view all published posts ---------------------------------
+        elseif($status == 'published')
+        {
+            $posts      = Post::published()->with('category', 'author')->latest()->get();
+            $postCount  = Post::published()->count();
+            $onlyTrashed = FALSE;
+        }
+
+        #--- view all scheduled posts ---------------------------------
+
+        elseif($status == 'scheduled')
+        {
+            $posts      = Post::scheduled()->with('category', 'author')->latest()->get();
+            $postCount  = Post::scheduled()->count();
+            $onlyTrashed = FALSE;
+        }
+
+        #--- view all dratf posts ---------------------------------
+        elseif($status == 'draft')
+        {
+            $posts      = Post::draft()->with('category', 'author')->latest()->get();
+            $postCount  = Post::draft()->count();
+            $onlyTrashed = FALSE;
+        }
+
+        else
         {
             $posts = Post::with('category', 'author')->latest()->get();
             $postCount = Post::count();

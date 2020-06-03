@@ -45,11 +45,23 @@ class Post extends Model
         return $query->orderBy('created_at', 'desc');
     }
 
+    #=========================================================
     #------- view post from today to yesterday (no futures) -------
+    #------ Scopes for statuses -------------------
     public function scopePublished($query)
     {
         return $query->where('published_at', '<=', Carbon::now() );
     }
+
+    public function scopeScheduled($query)
+    {
+        return $query->where("published_at", ">", Carbon::now());
+    }
+    public function scopeDraft($query)
+    {
+        return $query->whereNull("published_at");
+    }
+
 
 
 

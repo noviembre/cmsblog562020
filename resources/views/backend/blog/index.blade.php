@@ -42,6 +42,11 @@
 
                                 <div class="card-tools">
                                     <a href="?status=all">All</a> |
+
+                                    <a href="?status=published">Published</a> |
+                                    <a href="?status=scheduled">Scheduled</a> |
+                                    <a href="?status=draft">Draft</a> |
+
                                     <a href="?status=trash">Trash</a>
                                 </div>
                             </div>
