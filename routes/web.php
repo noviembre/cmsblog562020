@@ -44,3 +44,9 @@ Route::get('/home', 'Backend\HomeController@index')->name('home');
         'uses' => 'Backend\BlogController@restore',
         'as'   => 'backend.blog.restore'
     ]);
+
+    #-------------  Delete permanent a post   -------------
+    Route::delete('/backend/blog/force-destroy/{blog}', [
+        'uses' => 'Backend\BlogController@forceDestroy',
+        'as'   => 'blog.force-destroy'
+    ]);

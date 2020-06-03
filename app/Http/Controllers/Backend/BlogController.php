@@ -162,4 +162,13 @@ class BlogController extends BackendController
         return redirect()->back()
             ->with('message', 'You post has been moved from the Trash');
     }
+
+    public function forceDestroy($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->forceDelete();
+
+        return redirect('/backend/blog?status=trash')
+            ->with('message', 'Your post has been deleted successfully');
+    }
 }
