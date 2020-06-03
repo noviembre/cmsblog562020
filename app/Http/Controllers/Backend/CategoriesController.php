@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Category;
+use App\Http\Requests\CategoryStoreRequest;
 use Illuminate\Http\Request;
 
 class CategoriesController extends BackendController
@@ -29,7 +30,16 @@ class CategoriesController extends BackendController
         $category = new Category();
         return view("backend.categories.create", compact('category'));
     }
-    
+
+    public function store(CategoryStoreRequest $request)
+    {
+        #---we call Category create method, and past the data from the request object
+        Category::create($request->all());
+        #--- redirect to the Category Index Page
+        return redirect()->route('categories.index')
+            ->with("message", "New category was created successfully!");
+    }
+
     /**
      * Display the specified resource.
      *
