@@ -10,6 +10,7 @@ use Intervention\Image\Facades\Image;
 
 class BlogController extends BackendController
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -29,17 +30,15 @@ class BlogController extends BackendController
     {
         if (($status = $request->get('status')) && $status == 'trash')
         {
-            $posts     = Post::onlyTrashed('category', 'author')->latest()->get();
+            $posts = Post::onlyTrashed('category', 'author')->latest()->get();
             $postCount = Post::count();
             $onlyTrashed = TRUE;
-        }
-        else
+        } else
         {
-            $posts     = Post::with('category', 'author')->latest()->get();
+            $posts = Post::with('category', 'author')->latest()->get();
             $postCount = Post::count();
             $onlyTrashed = FALSE;
         }
-
 
 
         return view("backend.blog.index", compact(
@@ -61,10 +60,12 @@ class BlogController extends BackendController
             'post'
         ));
     }
+
     public function store(PostRequest $request)
     {
         $data = $this->handleRequest($request);
         $request->user()->posts()->create($data);
+
         return redirect('/backend/blog')->with('message', 'Your post was created successfully!');
     }
 
@@ -74,13 +75,13 @@ class BlogController extends BackendController
         $data = $request->all();
         if ($request->hasFile('image'))
         {
-            $image       = $request->file('image');
-            $fileName    = $image->getClientOriginalName();
+            $image = $request->file('image');
+            $fileName = $image->getClientOriginalName();
             $destination = $this->uploadPath;
 
             $successUploaded = $image->Move($destination, $fileName);
 
-            if($successUploaded)
+            if ($successUploaded)
             {
                 $width = config('cms.image.thumbnail.width');
                 $height = config('cms.image.thumbnail.height');
@@ -88,7 +89,7 @@ class BlogController extends BackendController
                 $extension = $image->getClientOriginalExtension();
                 $thumbnail = str_replace(".{$extension}", "_thumb.{$extension}", $fileName);
                 Image::make($destination . '/' . $fileName)
-                    ->resize($width,$height)
+                    ->resize($width, $height)
                     ->save($destination . '/' . $thumbnail);
             }
             $data['image'] = $fileName;
@@ -98,11 +99,10 @@ class BlogController extends BackendController
     }
 
 
-
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -113,12 +113,13 @@ class BlogController extends BackendController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $post = Post::findOrFail($id);
+
         return view("backend.blog.edit", compact(
             'post'
         ));
@@ -128,8 +129,8 @@ class BlogController extends BackendController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(PostRequest $request, $id)
@@ -137,6 +138,7 @@ class BlogController extends BackendController
         $post = Post::findOrFail($id);
         $data = $this->handleRequest($request);
         $post->update($data);
+
         return redirect('/backend/blog')
             ->with('message', 'Your post was updated successfully!');
     }
@@ -144,12 +146,13 @@ class BlogController extends BackendController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         Post::findOrFail($id)->delete();
+
         return redirect()->back()
             ->with('trash-message', ['Your post moved to Trash', $id]);
     }
@@ -159,6 +162,7 @@ class BlogController extends BackendController
     {
         $post = Post::withTrashed()->findOrFail($id);
         $post->restore();
+
         return redirect()->back()
             ->with('message', 'You post has been moved from the Trash');
     }
@@ -167,8 +171,26 @@ class BlogController extends BackendController
     {
         $post = Post::withTrashed()->findOrFail($id);
         $post->forceDelete();
+        $this->removeImage($post->image);
 
         return redirect('/backend/blog?status=trash')
             ->with('message', 'Your post has been deleted successfully');
+    }
+
+    private function removeImage($image)
+    {
+        #---- if image is not empty
+        if (!empty($image))
+        {
+            $imagePath = $this->uploadPath . '/' . $image;
+            #--- get the file extension of the original image
+            $ext = substr(strrchr($image, '.'), 1);
+            $thumbnail = str_replace(".{$ext}", "_thumb.{$ext}", $image);
+            $thumbnailPath = $this->uploadPath . '/' . $thumbnail;
+            if (file_exists($imagePath)) unlink($imagePath);
+            #---- remove thumbnail file if exists
+            if (file_exists($thumbnailPath)) unlink($thumbnailPath);
+
+        }
     }
 }
