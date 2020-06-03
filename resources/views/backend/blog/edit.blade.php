@@ -1,6 +1,6 @@
 @extends('layouts.backend.main')
 
-@section('title', 'MyBlog | Create')
+@section('title', 'MyBlog | Edit')
 @section('content')
 
     <div class="content-wrapper">
@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Create a blog post</h1>
+                        <h1 class="m-0 text-dark">Edit post</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -18,7 +18,7 @@
                                 <a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
                             </li>
                             <li class="breadcrumb-item"><a href="{{ route('blog.index') }}">Blog</a></li>
-                            <li class="active breadcrumb-item" >Create</li>
+                            <li class="active breadcrumb-item" >Edit</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -30,11 +30,12 @@
         <div class="content">
             <div class="container-fluid">
                 {!! Form::model($post, [
-                              'method' => 'POST',
-                              'route' => 'blog.store',
+                              'method' => 'PUT',
+                              'route' => ['blog.update', $post->id],
                               'files' => true,
                                'id' => 'post-form'
                           ]) !!}
+
 
                   @include('backend.blog.form')
 

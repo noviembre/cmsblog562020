@@ -57,8 +57,8 @@
                                         <th>Title</th>
                                         <th width="120">Author</th>
                                         <th width="150">Category</th>
-                                        <th width="170">Date</th>
                                         <th width="180">Action</th>
+                                        <th width="170">Date</th>
 
                                     </tr>
                                     </thead>
@@ -74,12 +74,18 @@
                                             <td> {{ $post->author->name }} </td>
                                             <td>{{ $post->category->title }}</td>
                                             <td>
-                                                date
+                                                <div class="btn-group">
+                                                    <a class="btn bg-gradient-default btn-sm" href=" {{ route('blog.edit', ['id' => $post->id ]) }}">                                    <i class="fas fa-edit"></i>
+                                                    </a>
+
+
+                                                </div>
+
+
                                             </td>
 
 
                                             <td>
-                                                date
                                                 <abbr title="{{ $post->dateFormatted(true) }}">{{ $post->dateFormatted() }}</abbr> |
                                                 {!! $post->publicationLabel() !!}
                                             </td>
@@ -97,8 +103,8 @@
                                         <th>Title</th>
                                         <th width="120">Author</th>
                                         <th width="150">Category</th>
-                                        <th width="170">Date</th>
                                         <th width="180">Action</th>
+                                        <th width="170">Date</th>
 
                                     </tr>
                                     </tfoot>
