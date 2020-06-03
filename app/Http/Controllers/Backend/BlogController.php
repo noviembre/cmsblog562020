@@ -25,16 +25,27 @@ class BlogController extends BackendController
         $this->uploadPath = public_path(config('cms.image.directory'));
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $posts     = Post::with('category', 'author')
-            ->latest()->get();
+        if (($status = $request->get('status')) && $status == 'trash')
+        {
+            $posts     = Post::onlyTrashed('category', 'author')->latest()->get();
+            $postCount = Post::count();
+            $onlyTrashed = TRUE;
+        }
+        else
+        {
+            $posts     = Post::with('category', 'author')->latest()->get();
+            $postCount = Post::count();
+            $onlyTrashed = FALSE;
+        }
 
-        $postCount = Post::count();
+
 
         return view("backend.blog.index", compact(
             'posts',
-            'postCount'
+            'postCount',
+            'onlyTrashed'
         ));
     }
 
