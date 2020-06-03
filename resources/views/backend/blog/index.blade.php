@@ -71,8 +71,19 @@
                                             <td>{{ $post->category->title }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="btn bg-gradient-default btn-sm" href=" {{ route('blog.edit', ['id' => $post->id ]) }}">                                    <i class="fas fa-edit"></i>
+                                                    <a class="btn btn-info btn-sm" href=" {{ route('blog.edit', ['id' => $post->id ]) }}">                                    <i class="fas fa-edit"></i>
                                                     </a>
+
+                                                        {!! Form::open([
+                                                          'method' => 'DELETE',
+                                                           'route' => ['blog.destroy', $post->id ]
+                                                       ]) !!}
+
+                                                        <button type="submit" class="btn btn-danger btn-sm">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+
+                                                        {{Form::close()}}
 
 
                                                 </div>
