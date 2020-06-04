@@ -89,10 +89,35 @@
                                 Add New
                             </a>
                         </li>
+                    </ul>
+                </li>
 
 
 
 
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Users
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{ route('users.index') }}" class="nav-link active">
+                                <i class="fa fa-user-friends"></i>
+                                All Users
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('users.create') }}" class="nav-link">
+                                <i class="fa fa-file-alt"></i>
+                                Add New
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

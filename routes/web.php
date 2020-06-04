@@ -55,3 +55,6 @@ Route::get('/home', 'Backend\HomeController@index')->name('home');
     #=====================================================
     #=================   Categories   ====================
     Route::resource('/backend/categories', 'Backend\CategoriesController');
+
+    #=================   Users   ====================
+    Route::resource('/backend/users', 'Backend\UsersController');
