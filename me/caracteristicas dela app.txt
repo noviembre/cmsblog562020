@@ -2,3 +2,8 @@
     * no puedes actualizar un usuario cuyo email ya este tomado
     * si quieres editar los datos (nombre, email) debes introducir 2 veces la contraseña.
     * te responde una notificación si no introduces correctamente ambas contraseñas.
+2. Eliminar usuario
+    * aquí tuve que mod 2 migraciones y colocar null (slug, bio) para poder crear nuevos usuarios
+    2.1 antes de eliminar un usuario muestra una pagina de confirmación
+        * en dicha pagina se lista todos los usuarios excepto el actual.
+        *

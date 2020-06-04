@@ -56,5 +56,14 @@ Route::get('/home', 'Backend\HomeController@index')->name('home');
     #=================   Categories   ====================
     Route::resource('/backend/categories', 'Backend\CategoriesController');
 
+
+    #=================   Confirm Delete User   =======
+    Route::get('/backend/users/confirm/{users}', [
+        'uses' => 'Backend\UsersController@confirm',
+        'as' => 'users.confirm'
+    ]);
     #=================   Users   ====================
     Route::resource('/backend/users', 'Backend\UsersController');
+
+
+

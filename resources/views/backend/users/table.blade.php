@@ -22,10 +22,7 @@
                     <a class="btn btn-info btn-sm" href=" {{ route('users.edit', ['id' => $user->id ]) }}">                                    <i class="fas fa-edit"></i>
                     </a>
 
-                    {!! Form::open([
-                      'method' => 'DELETE',
-                       'route' => ['users.destroy', $user->id ]
-                   ]) !!}
+
 
                     @if($user->id == config('cms.protected_user_id'))
                         <button onclick="return false" type="submit" class="btn btn-sm btn-default disabled">
@@ -33,13 +30,11 @@
                         </button>
                     @else
 
-                        <button type="submit" onclick="return confirm('are you sure?')" class="btn btn-danger btn-sm">
+                        <a href="{{ route('users.confirm', $user->id)}}"  class="btn btn-danger btn-sm">
                             <i class="fa fa-times"></i>
-                        </button>
+                        </a>
 
                     @endif
-
-                    {{Form::close()}}
 
 
                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Requests\UserConfirmRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\User;
@@ -60,13 +61,20 @@ class UsersController extends BackendController
             ->with("message", "User was updated successfully!");
     }
 
-
-    public function destroy(UserDestroy $request, $id)
+    #------ confirm view
+    public function confirm(UserConfirmRequest $request, $id)
     {
-        $category = User::findOrFail($id);
-        $category->delete();
+        $user = User::findOrFail($id);
+        #---- show all users in the list except the user that will be remove
+        $list_users_except_current = User::where('id', '!=', $user->id)->pluck('name', 'id');
+        return view("backend.users.confirm", compact('user', 'list_users_except_current'));
 
-        return redirect()->route('users.index')
-            ->with("message", "User was deleted successfully!");
     }
+
+    public function destroy(UserDestroyRequest $request, $id)
+    {
+
+    }
+
+
 }
