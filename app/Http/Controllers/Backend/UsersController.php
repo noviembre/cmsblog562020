@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Requests\UserStoreRequest;
 use App\User;
 use Illuminate\Http\Request;
 
