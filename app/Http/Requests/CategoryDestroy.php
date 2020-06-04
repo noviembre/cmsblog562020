@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryDestroyRequest extends FormRequest
+class CategoryDestroy extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,8 +14,9 @@ class CategoryDestroyRequest extends FormRequest
     public function authorize()
     {
         #-- if the id that will be remove is equal to the protected Uncategorized id, this request will be reject it
-        return !($this->route('categories') == config('cms.default_category_id'));
+        return !($this->route('category') == config('cms.default_category_id'));
     }
+
 
 
     /**

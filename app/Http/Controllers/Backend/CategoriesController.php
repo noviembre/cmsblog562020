@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Category;
-use App\Http\Requests\CategoryDestroyRequest;
+use App\Http\Requests\CategoryDestroy;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Post;
@@ -72,13 +72,8 @@ class CategoriesController extends BackendController
             ->with("message", "Category was updated successfully!");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(CategoryDestroyRequest $request, $id)
+
+    public function destroy(CategoryDestroy $request, $id)
     {
 
         #--get all post including trashed and save as default_category_id before delete the category

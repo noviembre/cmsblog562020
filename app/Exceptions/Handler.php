@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof \Illuminate\Auth\Access\AuthorizationException)
         {
-            return redirect()->back()->with('no-authorized-message','This Action is not authorized');
+            return redirect()->back()->with('no-authorized-message','This Action is not authorizado');
         }
         return parent::render($request, $exception);
     }
