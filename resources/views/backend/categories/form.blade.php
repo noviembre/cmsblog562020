@@ -16,7 +16,7 @@
                     {!! Form::text('slug', null, ['class' => 'form-control']) !!}
 
                     @if($errors->has('slug'))
-                        <span class="help-block">{{ $errors->first('title') }}</span>
+                        <span class="help-block">{{ $errors->first('slug') }}</span>
                     @endif
 
 
