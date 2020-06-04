@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -36,19 +37,10 @@ class UsersController extends BackendController
         User::create($request->all());
         #--- redirect to the User Index Page
         return redirect()->route('users.index')
-            ->with("message", "New category was created successfully!");
+            ->with("message", "New user was created successfully!");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
