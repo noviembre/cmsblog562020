@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\UserConfirmRequest;
+use App\Http\Requests\UserDestroyRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\User;
@@ -73,6 +74,28 @@ class UsersController extends BackendController
 
     public function destroy(UserDestroyRequest $request, $id)
     {
+
+        $user = User::findOrFail($id);
+        #---- asigning the selected option
+        $deleteOption = $request->delete_option;
+        #---- asigning the selected user
+        $selectedUser = $request->selected_user;
+
+        #---- if  $deleteOption is = 'delete'
+        if ($deleteOption == "delete") {
+            // delete all user's post including trashed post
+            $user->posts()->withTrashed()->forceDelete();
+        }
+
+        #--- otherwise if $deleteOption = 'attribute' then
+        elseif ($deleteOption == "attribute") {
+            #---- attribute all posts to the selected user
+            $user->posts()->update(['author_id' => $selectedUser]);
+        }
+//        $user->delete();
+        #-----for backend
+        return redirect()->route('users.index')
+            ->with("message", "User was deleted successfully!");
 
     }
 

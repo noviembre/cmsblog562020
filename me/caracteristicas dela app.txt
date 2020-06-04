@@ -6,4 +6,5 @@
     * aquí tuve que mod 2 migraciones y colocar null (slug, bio) para poder crear nuevos usuarios
     2.1 antes de eliminar un usuario muestra una pagina de confirmación
         * en dicha pagina se lista todos los usuarios excepto el actual.
-        *
+        * Users confirm:
+            al eliminar un usuario q haya creado un post dicho usuario todavia no se elimina pero su post pasa a otro propietario
