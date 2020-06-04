@@ -22,9 +22,11 @@
                     <a class="btn btn-info btn-sm" href=" {{ route('users.edit', ['id' => $user->id ]) }}">                                    <i class="fas fa-edit"></i>
                     </a>
 
+                    <?php $currentUser = Auth::user() ?>
 
 
-                    @if($user->id == 7878787)
+                <!-- ahora estan protegido del lado del server y del cliente, ya lo confirme -->
+                    @if($user->id == config('cms.default_user_id') || $user->id == $currentUser->id)
                         <button onclick="return false" type="submit" class="btn btn-sm btn-default disabled">
                             <i class="fa fa-times"></i>
                         </button>
