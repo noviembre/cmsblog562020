@@ -63,7 +63,7 @@ class UsersController extends BackendController
     }
 
     #------ confirm view
-    public function confirm(UserConfirmRequest $request, $id)
+    public function confirm(UserDestroyRequest $request, $id)
     {
         $user = User::findOrFail($id);
         #---- show all users in the list except the user that will be remove

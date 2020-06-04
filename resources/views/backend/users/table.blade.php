@@ -24,7 +24,7 @@
 
 
 
-                    @if($user->id == config('cms.protected_user_id'))
+                    @if($user->id == 7878787)
                         <button onclick="return false" type="submit" class="btn btn-sm btn-default disabled">
                             <i class="fa fa-times"></i>
                         </button>
