@@ -92,7 +92,7 @@ class UsersController extends BackendController
             #---- attribute all posts to the selected user
             $user->posts()->update(['author_id' => $selectedUser]);
         }
-//        $user->delete();
+        $user->delete();
         #-----for backend
         return redirect()->route('users.index')
             ->with("message", "User was deleted successfully!");

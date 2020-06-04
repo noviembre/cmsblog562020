@@ -8,3 +8,5 @@
         * en dicha pagina se lista todos los usuarios excepto el actual.
         * Users confirm:
             al eliminar un usuario q haya creado un post dicho usuario todavia no se elimina pero su post pasa a otro propietario
+            - Select [Delete All Content]
+            se elimina el usuario y tambien sus posts
