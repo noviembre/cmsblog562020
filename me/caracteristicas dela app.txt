@@ -10,3 +10,4 @@
             al eliminar un usuario q haya creado un post dicho usuario todavia no se elimina pero su post pasa a otro propietario
             - Select [Delete All Content]
             se elimina el usuario y tambien sus posts
+     2.2 protección de eliminación tanto del lado del servidor como del cliente.

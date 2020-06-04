@@ -10,7 +10,7 @@
 
 
     <tbody>
-
+    <?php $currentUser = Auth::user() ?>
     @foreach($users as $user)
 
         <tr>
@@ -22,7 +22,7 @@
                     <a class="btn btn-info btn-sm" href=" {{ route('users.edit', ['id' => $user->id ]) }}">                                    <i class="fas fa-edit"></i>
                     </a>
 
-                    <?php $currentUser = Auth::user() ?>
+
 
 
                 <!-- ahora estan protegido del lado del server y del cliente, ya lo confirme -->
