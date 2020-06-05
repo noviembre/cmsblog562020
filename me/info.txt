@@ -18,4 +18,20 @@
     6.5 Extends the Models, after do everything, run composer dump-autoload
     6.6 composer dump-autoload (At this point you are ready to go)
 
+ 7. Testing roles:
+        Tinker:
+            $user1 = App\User::find(1);
+            $user2 = App\User::find(2);
+            $user3 = App\User::find(3);
+
+            Asking to the console:
+            question: $user1->hasRole('admin')
+             Reply => true
+            question: $user1->hasRole('author')
+            Reply => false
+            question: $user2->hasRole('admin')
+            Reply => false
+
+            Pta: si everything sale como deberia entonces perfecto, sino vuelve a ver el video
+
 
