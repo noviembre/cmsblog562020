@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Permission;
+use App\Role;
 class PermissionsTableSeeder extends Seeder
 {
     /**
@@ -33,5 +34,26 @@ class PermissionsTableSeeder extends Seeder
         $crudUser = new Permission();
         $crudUser->name = "crud-user";
         $crudUser->save();
+
+
+        // attach roles permissions
+        $admin = Role::whereName('admin')->first();
+        $editor = Role::whereName('editor')->first();
+        $author = Role::whereName('author')->first();
+
+        #--- to make sure the role has not duplicate, detach the permission
+        $admin->detachPermissions([$crudPost, $updateOthersPost, $deleteOthersPost, $crudCategory, $crudUser]);
+        #------ Admin can: $crudPost, $updateOthersPost, $deleteOthersPost, $crudCategory, $crudUser
+        $admin->attachPermissions([$crudPost, $updateOthersPost, $deleteOthersPost, $crudCategory, $crudUser]);
+
+
+        $editor->detachPermissions([$crudPost, $updateOthersPost, $deleteOthersPost, $crudCategory]);
+        #----- Editar Can: $crudPost, $updateOthersPost, $deleteOthersPost, $crudCategory
+        $editor->attachPermissions([$crudPost, $updateOthersPost, $deleteOthersPost, $crudCategory]);
+
+
+        $author->detachPermission($crudPost);
+        #----- Author Can  $crudPost
+        $author->attachPermission($crudPost);
     }
 }
