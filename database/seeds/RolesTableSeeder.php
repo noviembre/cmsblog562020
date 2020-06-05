@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Role;
+use App\User;
 
 class RolesTableSeeder extends Seeder
 {
@@ -12,7 +13,14 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        //DB::table('roles')->truncate();
+
+        #--- this line (DB::table('roles')->truncate();) will only works if you refresh everything:
+        #--- this means: php artisan migrate:refresh
+        #--- php artisan db:seed
+        # otherwise, it will fail.
+        DB::table('roles')->truncate();
+
+
         // Create Admin role
         $admin = new Role();
         $admin->name = "admin";
@@ -28,5 +36,25 @@ class RolesTableSeeder extends Seeder
         $author->name = "author";
         $author->display_name = "Author";
         $author->save();
+
+
+
+        // Set roles for user 1,2,3
+
+        // first user as admin
+        $user1 = User::find(1);
+        #---detachRole: is for not duplicate roles
+        $user1->detachRole($admin);
+        $user1->attachRole($admin);
+
+        // second user as editor
+        $user2 = User::find(2);
+        $user2->detachRole($editor);
+        $user2->attachRole($editor);
+
+        // third user as author
+        $user3 = User::find(3);
+        $user3->detachRole($author);
+        $user3->attachRole($author);
     }
 }
