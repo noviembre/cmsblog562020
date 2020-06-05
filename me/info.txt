@@ -11,3 +11,7 @@
 6. Install LaraTrust for laravel 5.6 (https://laratrust.santigarcor.me/docs/5.2/installation.html)
     6.1 composer require "santigarcor/laratrust:5.2.*"
     6.2 php artisan vendor:publish --tag="laratrust"
+    6.3 php artisan laratrust:migration (son los ultimos pasos)
+            6.1 php artisan migrate
+
+
