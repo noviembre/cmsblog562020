@@ -35,3 +35,38 @@
             Pta: si everything sale como deberia entonces perfecto, sino vuelve a ver el video
 
 
+8. Testing Permissions:
+
+        ------------------------------------------------------------------
+        #------ 8.1 Assinging Variables
+        $user1 = App\User::find(1);
+        $user2 = App\User::find(2);
+        $user3 = App\User::find(3);
+
+        #----- 8.2 Questions
+        asking... Can the User1 CRUD post?
+        >>> $user1->can('crud-post')
+        => true (yes he can)
+
+        asking... Can the User1 UPDATE others post?
+        >>> $user1->can('update-others-post')
+        => true (yes he can)
+
+        >>> $user1->can('delete-others-post')
+        => true (yes he can)
+        >>> $user1->can('crud-category)
+        PHP Parse error: Syntax error, unexpected T_ENCAPSED_AND_WHITESPACE on line 1
+        >>> $user1->can('crud-category')
+        => true
+        >>> $user1->can('crud-user')
+        => true
+        >>> $user2->can(['crud-post','crud-category','curd-user'])
+        => true
+        >>> $user2->can(['update-others-post','delete-others-post','crud-user'])
+        => true
+        >>> $user3->can(['crud-post','crud-category'])
+        => true
+        >>> $user3->can(['crud-post','crud-category'], true)
+        => false
+
+
