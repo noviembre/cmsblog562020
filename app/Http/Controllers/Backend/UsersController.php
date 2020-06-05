@@ -36,8 +36,10 @@ class UsersController extends BackendController
     public function store(UserStoreRequest $request)
     {
         #---we call User create method, and past the data from the request object
-        User::create($request->all());
-        #--- redirect to the User Index Page
+        $data = $request->all();
+        $data['password'] = bcrypt($data['password']);
+        User::create($data);
+
         return redirect()->route('users.index')
             ->with("message", "New user was created successfully!");
     }
