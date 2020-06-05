@@ -15,5 +15,7 @@
             6.1 php artisan migrate
 
     6.4 Create Role and Permission Model
+    6.5 Extends the Models, after do everything, run composer dump-autoload
+    6.6 composer dump-autoload (At this point you are ready to go)
 
 
