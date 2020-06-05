@@ -14,12 +14,14 @@
 
     Route::get('/', [
         'uses' => 'BlogController@index',
-        'as'    => 'blog'
+        'as'    => 'blogfront'
     ]);
 
+
+    #=================   blog details   ====================
     Route::get('/blog/{post}', [
         'uses' => 'BlogController@show',
-        'as'   => 'blog.show'
+        'as'   => 'blogfront.show'
     ]);
 
     #=================   Category show   ====================
