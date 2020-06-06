@@ -43,10 +43,19 @@ class CheckPermissionsMiddleware
             // if the current method exists in methods list,
             // we'll check the permission
             # if ... and if $classesMapp exits
+
             if (in_array($method, $methods) && isset($classesMap[$controller]))
             {
                 $className = $classesMap[$controller];
-                dd("{$permission}-{$className}");
+                // if the current user has not update-others-post/delete-others-post permission
+                // make sure he only modify his/her own post
+
+                if ( !$currentUser->can("{$permission}-{$className}"))
+                {
+                    abort(403, " Prohibido el paso jeje ");
+                }
+                break;
+
             }
 
         }
