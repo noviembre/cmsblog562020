@@ -15,7 +15,9 @@ class CheckPermissionsMiddleware
      */
     public function handle($request, Closure $next)
     {
-        dd($request->route()->getAction());
+        $currentActionName = $request->route()->getActionName();
+        list($controller, $method) = explode('@', $currentActionName);
+        dd("C: $controller M: $method");
         return $next($request);
     }
 }
