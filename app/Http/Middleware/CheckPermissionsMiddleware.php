@@ -50,7 +50,11 @@ class CheckPermissionsMiddleware
                 // if the current user has not update-others-post/delete-others-post permission
                 // make sure he only modify his/her own post
 
-                if ( !$currentUser->can("{$permission}-{$className}"))
+                if ($className == 'post' && in_array($method, ['edit', 'update', 'destroy', 'restore', 'forceDestroy']))
+                {
+                    dd('current user is trying to edit/delete');
+                }
+                elseif ( !$currentUser->can("{$permission}-{$className}"))
                 {
                     abort(403, " Prohibido el paso jeje ");
                 }
