@@ -1,0 +1,10 @@
+y si apunto en una hoja los que incluye una función para que funcione?
+por ejemplo
+
+la sel blog.test/blog/my-new-post
+1. index.php
+2. controllers
+3. routeserviceprovider
+    3.1 boot()
+
+    algo asi...
