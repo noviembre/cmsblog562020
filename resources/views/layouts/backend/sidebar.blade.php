@@ -66,7 +66,8 @@
                 </li>
 
 
-                <li class="nav-item has-treeview menu-open">
+                @if (check_user_permissions(request(), "Categories@index"))
+                    <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
@@ -91,10 +92,11 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
 
 
-
+                @if (check_user_permissions(request(), "Users@index"))
                 <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -120,7 +122,7 @@
                         </li>
                     </ul>
                 </li>
-
+                @endif
 
 
                 <li class="nav-item">
