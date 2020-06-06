@@ -13,5 +13,15 @@ php artisan make:middleware NameMiddleware
         }
 ##4 Edit middleware
 a. A:\win\laragon\www\cmsblog57\app\Http\Middleware\CheckPermissionsMiddleware.php
+## 5 Crear un helper 
+ cmsblog57\app\Helpers\permissions.php
+### 5.1 registra el archivo
+ en composer.json
+ 
+ a. "files": ["app/Helpers/permissions.php"]
+ b. has un dumbo
 
+ 
+ 
+ 
 
