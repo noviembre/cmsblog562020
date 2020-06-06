@@ -52,7 +52,12 @@ class CheckPermissionsMiddleware
 
                 if ($className == 'post' && in_array($method, ['edit', 'update', 'destroy', 'restore', 'forceDestroy']))
                 {
-                    dd('current user is trying to edit/delete');
+                    // if the current user has not update-others-post/delete-others-post permission
+                    // make sure she/he only modify his/her own post
+                    if  (!$currentUser->can('update-others-post') || !$currentUser->can('delete-others-post'))
+                    {
+                        dd("you can not update or delete other post");
+                    }
                 }
                 elseif ( !$currentUser->can("{$permission}-{$className}"))
                 {
