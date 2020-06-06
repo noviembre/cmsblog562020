@@ -30,14 +30,23 @@ class CheckPermissionsMiddleware
             'crud' => ['create', 'store', 'edit', 'update', 'destroy', 'restore', 'forceDestroy', 'index', 'view']
         ];
 
+        // mapping controllers name
+        $classesMap = [
+            'Blog'       => 'post',
+            'Users'      => 'user',
+            'Categories' => 'category'
+        ];
+
         // perform an array to loop cru permissions map
         foreach ($crudPermissionsMap as $permission => $methods)
         {
             // if the current method exists in methods list,
             // we'll check the permission
-            if (in_array($method, $methods))
+            # if ... and if $classesMapp exits
+            if (in_array($method, $methods) && isset($classesMap[$controller]))
             {
-                dd("{$permission}-{$controller}");
+                $className = $classesMap[$controller];
+                dd("{$permission}-{$className}");
             }
 
         }
