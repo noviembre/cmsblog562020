@@ -12,6 +12,7 @@
 
 
     <tbody>
+    <?php $request = request(); ?>
 
     @foreach($posts as $post)
 
@@ -25,16 +26,33 @@
 
 
                     {!! Form::open([ 'method' => 'PUT', 'route' => ['backend.blog.restore', $post->id]]) !!}
-                    <button title="Restore" class="btn btn-sm btn-default">
-                        <i class="fa fa-clock"></i>
-                    </button>
+
+                    @if (check_user_permissions($request, "Blog@restore", $post->id))
+                        <button title="Restore" class="btn btn-sm btn-default">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                    @else
+                        <button title="Restore" onclick="return false;" class="btn btn-xs btn-default disabled">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                    @endif
+
+
                     {!! Form::close() !!}
 
 
                     {!! Form::open([ 'method' => 'DELETE', 'route' => ['blog.force-destroy', $post->id]]) !!}
-                    <button title="Delete Permanent" onclick="return confirm('You are about to delete a post permanently. Are you sure?')" type="submit" class="btn btn-sm btn-danger">
-                        <i class="fa fa-trash"></i>
-                    </button>
+                    
+
+                    @if (check_user_permissions($request, "Blog@forceDestroy", $post->id))
+                        <button title="Delete Permanent" onclick="return confirm('You are about to delete a post permanently. Are you sure?')" type="submit" class="btn btn-sm btn-danger">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    @else
+                        <button title="Delete Permanent" onclick="return false;" type="submit" class="btn btn-sm btn-danger disabled">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    @endif
 
                     {!! Form::close() !!}
 

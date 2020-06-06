@@ -12,6 +12,7 @@
 
 
     <tbody>
+    <?php $request = request(); ?>
 
     @foreach($posts as $post)
 
@@ -22,19 +23,32 @@
             <td>{{ $post->category->title }}</td>
             <td>
                 <div class="btn-group">
+                    @if (check_user_permissions($request, "Blog@edit", $post->id))
                     <a class="btn btn-info btn-sm" href=" {{ route('blog.edit', ['id' => $post->id ]) }}">                                    <i class="fas fa-edit"></i>
                     </a>
+                    @else
+                        <a href="#" class="btn btn-sm btn-info disabled">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    @endif
 
                     {!! Form::open([
                       'method' => 'DELETE',
                        'route' => ['blog.destroy', $post->id ]
                    ]) !!}
 
-                    <button type="submit" class="btn btn-danger btn-sm">
-                        <i class="fa fa-times"></i>
-                    </button>
+                        @if (check_user_permissions($request, "Blog@destroy", $post->id))
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        @else
+                            <button type="button" onclick="return false;" class="btn btn-sm btn-danger disabled">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        @endif
 
-                    {{Form::close()}}
+
+                        {{Form::close()}}
 
 
                 </div>
